@@ -22,21 +22,21 @@ module D3.Base
   , PredicateN
   , transparent
   , opaque
-  , theHorror
+  -- , theHorror
   ) where
 
-import Control.Monad.Eff (Eff)
+import Control.Monad.Eff (Eff, kind Effect)
 import Data.Array ((:))
 import Data.Foldable (foldr, intercalate)
-import Data.Foreign.Null (writeNull)
+-- import Data.Foreign.Null (writeNull)
 import Data.Function (applyFlipped)
 import Data.Maybe (Maybe(Nothing, Just))
 import Prelude (show, class Show, bind, (<>), ($))
-import Unsafe.Coerce (unsafeCoerce)
+-- import Unsafe.Coerce (unsafeCoerce)
 
 -- || FFI for D3
-foreign import data D3 :: !
-foreign import data D3Element :: *
+foreign import data D3 :: Effect
+foreign import data D3Element :: Type
 
 
 type D3Eff a = ∀ e. Eff (d3 :: D3 | e) a
@@ -67,8 +67,8 @@ instance isShowTypenames :: Show Typenames where
       f {name: (Just n), type: t } acc = ((show t) <> "." <> n) : acc
       f {name: Nothing,  type: t } acc =             (show t)  : acc
 
-theHorror :: ∀ t0. t0
-theHorror = unsafeCoerce writeNull
+-- theHorror :: ∀ t0. t0
+-- theHorror = unsafeCoerce writeNull
 
 foreign import transparent :: String
 foreign import opaque :: String

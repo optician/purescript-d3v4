@@ -3,14 +3,14 @@ module D3.ForceSimulation where
 import Data.Pair
 import D3.Base (Index, D3, Eff)
 import D3.Selection (Selection)
-import Data.Function.Eff (EffFn2, EffFn1, EffFn3, runEffFn1, runEffFn2, runEffFn3)
+import Control.Monad.Eff.Uncurried (EffFn2, EffFn1, EffFn3, runEffFn1, runEffFn2, runEffFn3)
 import Data.Function.Uncurried (mkFn2, Fn2)
 import Data.Maybe (Maybe(Nothing, Just))
 import Prelude (Unit)
 
 
-foreign import data D3Simulation :: *
-foreign import data D3Force      :: *
+foreign import data D3Simulation :: Type
+foreign import data D3Force      :: Type
 
 type Node = { id :: String, group :: Number }
 type Link = { source :: String, target :: String, value :: Number }
